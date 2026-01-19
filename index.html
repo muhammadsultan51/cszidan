@@ -1,522 +1,586 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/icon.png">
-    <title>Personal Portfolio</title>
+    <title>Portfolio - Mahasiswa Fasilkom UI '25</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            font-family: 'Zen Kaku Gothic New', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .section-title {
-            font-family: 'Zen Maru Gothic', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            color: #1a1a1a;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            display: block;
-            width: 100%;
-            letter-spacing: -0.05em;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background-color: #1625f9;
-            opacity: 0.3;
-        }
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2.5rem;
-                margin-bottom: 2rem;
-            }
-        }
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 100;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: #1a1a1a;
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 3px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-            nav {
-                display: none;
-            }
-            nav.active {
-                display: block;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: white;
-                z-index: 99;
-            }
-            nav ul {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-                width: 100%;
-                text-align: center;
-                margin: 0;
-                padding: 0;
-            }
-            nav ul li {
-                margin: 0 !important;
-                width: 100%;
-                text-align: center;
-            }
-            nav ul li a {
-                font-size: 1.2rem;
-                display: block;
-                width: 100%;
-                text-align: center;
-                padding: 0 20px;
-            }
-        }
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        @keyframes scroll-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes scrollDown {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-            100% { transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .scroll-container {
-            display: flex;
-            width: 200%;
-            animation: scroll-left 40s infinite linear 0.5s both;
-            padding: 0.5rem 0rem;
-            will-change: transform;
-        }
-        .scroll-container-reverse {
-            display: flex;
-            width: 200%;
-            animation: scroll-right 40s infinite linear 0.5s both;
-            padding: 0.5rem 0rem;
-            will-change: transform;
-        }
-        .scroll-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            margin: 0.5rem 0;
-        }
-        .scroll-wrapper::before,
-        .scroll-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 50px;
-            height: 100%;
-            z-index: 1;
-        }
-        .scroll-wrapper::before {
-            left: 0;
-            background: linear-gradient(to right, white, transparent);
-        }
-        .scroll-wrapper::after {
-            right: 0;
-            background: linear-gradient(to left, white, transparent);
-        }
-        .animate-fadeInUp {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        .animate-scrollDown {
-            animation: scrollDown 2s ease-in-out infinite;
-        }
-        .work-item-shadow {
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px 0px;
-            transform: translateZ(0);
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 1s ease-out, transform 1s ease-out, box-shadow 0.3s ease-out;
-        }
-    </style>
-</head>
-<body class="bg-white">
-    <header>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <nav class="mx-auto px-4 py-4">
-            <ul class="flex justify-end space-x-8 md:space-x-8">
-                <li><a href="#works" class="text-gray-800
-                        hover:text-gray-600">Product</a></li>
-                <li><a href="#about" class="text-gray-800
-                        hover:text-gray-600">Profile</a></li>
-                <li><a href="#contact" class="text-gray-800 hover:text-gray-600">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const nav = document.querySelector('nav');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
-        });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                hamburger.classList.remove('active');
-                nav.classList.remove('active');
-                
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
-        });
-
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-            return (
-                rect.top <= windowHeight * 0.8 && 
-                rect.bottom >= 0
-            );
-        }
-
-        function handleScroll() {
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach(element => {
-                if (isElementInViewport(element)) {
-                    element.classList.add('visible');
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        'ui-yellow': '#FFD700', // UI Yellow roughly
+                        'pastel-blue': '#fafdfd',
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
                 }
-            });
-        }
-
-        handleScroll();
-
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
             }
-        });
+        }
     </script>
 
-    <section class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50/50 to-white relative">
-        <div class="absolute inset-0 opacity-[0.03]">
-            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0); background-size: 24px 24px;"></div>
-        </div>
-        <div class="absolute top-32 left-32 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
-        <div class="absolute bottom-32 right-32 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
-        <div class="absolute top-64 left-64 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+    <style>
+        body {
+            background-color: #fafdfd;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
         
-        <div class="text-center relative z-10">
-            <h1 class="text-7xl font-light tracking-widest mb-8 opacity-0 animate-fadeInUp text-blue-700" style="animation-delay: 0.5s;">
-                My Portfolio
-            </h1>
-            <div class="space-y-4 opacity-0 animate-fadeInUp" style="animation-delay: 1s;">
-                <p class="text-2xl text-blue-500">SOFTWARE DEVELOPMENT</p>
-                <p class="text-2xl text-blue-500">AI ENGINEER</p>
-            </div>
-            <div class="mt-12 opacity-0 animate-fadeInUp" style="animation-delay: 1.5s;">
-                <div class="flex flex-col items-center">
-                    <p class="text-sm text-blue-500 mb-2">scroll</p>
-                    <div class="w-6 h-10 border-2 border-blue-500 rounded-full p-1">
-                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-scrollDown mx-auto"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        /* Grid Background Pattern */
+        .bg-grid-elegant {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+        }
 
-    <section id="works" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title">Our Product</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <a href="https://www.roblox.com/games/123906378839288/Fishing-System-Backup-Project" target="_blank" rel="noopener noreferrer" class="group block">
-                    <div class="aspect-video mb-4 work-item-shadow  group-hover:shadow-xl opacity-0 fade-in">
-                        <img src="img/fishing_system.png" alt="ケーキ店" class="object-cover">
-                    </div>
-                    <h3 class="text-xl mb-2 relative inline-block">
-                        <span class="relative">Fishing System</span>
-                        <span class="inline-block ml-2 px-2 py-0.5 text-sm bg-blue-100 text-blue-600 rounded-full">prototype</span>
-                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-blue-500/30 transition-all duration-300 group-hover:w-full"></span>
-                    </h3>
-                    <p class="text-gray-600
-                            mb-4">I developed a unique fishing system for Hangout Games on Roblox, simulating dynamic rope physics using Hooke’s Law and force vectors to reflect real-time spatial tension.</p>
-                    <p class="text-sm text-gray-500">design / coding / physics</p>
-                </a>
-                <a href="https://www.roblox.com/games/14350341068/Home-Alone-Project" target="_blank" rel="noopener noreferrer" class="group block">
-                    <div class="aspect-video mb-4 work-item-shadow  group-hover:shadow-xl opacity-0 fade-in">
-                        <img src="img/home_alone.png" alt="カフェ" class="object-cover">
-                    </div>
-                    <h3 class="text-xl mb-2 relative inline-block">
-                        <span class="relative">Home Alone House</span>
-                        <span class="inline-block ml-2 px-2 py-0.5 text-sm bg-blue-100 text-blue-600 rounded-full">prototype</span>
-                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-blue-500/30 transition-all duration-300 group-hover:w-full"></span>
-                    </h3>
-                    <p class="text-gray-600
-                            mb-4">I developed a 3D replica of the Home Alone house in Roblox Studio with architectural precision, focusing on proportions, materials, lighting, and spatial detailing.</p>
-                    <p class="text-sm text-gray-500">architect / design / coding</p>
-                </a>
-            </div>
-        </div>
-    </section>
+        /* Typography Effects */
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px #cbd5e1;
+        }
+        @media (min-width: 768px) {
+            .text-outline { -webkit-text-stroke: 2px #cbd5e1; }
+        }
 
-    <section class="py-8 md:py-20 bg-white relative">
-        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent"></div>
-        <div class="px-2 md:px-4">
-            <h2 class="section-title">Collections</h2>
-            <div class="scroll-wrapper mb-2 md:mb-8">
-                <div class="scroll-container">
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/classic_shirt.png" alt="Roblox CS UI Classic Shirt" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Roblox CS UI Classic Shirt</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_hat.png" alt="コーヒーショップロゴ" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Hat</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_totebag.png" alt="3D Model of UI Tote Bag" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Tote Bag</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_umbrella.png" alt="3D Model of UI Umbrella" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Umbrella</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/classic_shirt.png" alt="Roblox CS UI Classic Shirt" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Roblox CS UI Classic Shirt</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_hat.png" alt="コーヒーショップロゴ" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Hat</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_totebag.png" alt="3D Model of UI Tote Bag" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Tote Bag</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/ui_umbrella.png" alt="3D Model of UI Umbrella" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">3D Model of UI Umbrella</p>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-wrapper">
-                <div class="scroll-container-reverse">
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/guess_who_is.png" alt="Guess Who Is Game" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Guess Who Is Game</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/app.png" alt="Waste Management Incentive Application Prototype" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Waste Management Incentive Application Prototype</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/snbp.png" alt="SNBP Admission" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">SNBP Admission</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/cake_illust.png" alt="TikTok Channel" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">TikTok Channel</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/guess_who_is.png" alt="Guess Who Is Game" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Guess Who Is Game</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/app.png" alt="Waste Management Incentive Application Prototype" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">Waste Management Incentive Application Prototype</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/snbp.png" alt="SNBP Admission" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">SNBP Admission</p>
-                    </div>
-                    <div class="flex flex-col w-[120px] md:w-[calc(100vw/4)] pr-4 md:pr-8">
-                        <div class="aspect-video mb-2 md:mb-4 work-item-shadow">
-                            <img src="img/cake_illust.png" alt="TikTok Channel" class="object-cover">
-                        </div>
-                        <p class="text-[2vw] md:text-sm text-gray-600 min-[2vw]:text-xs">TikTok Channel</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
 
-    <section id="about" class="relative">
-        <div class="absolute inset-0 opacity-[0.03]">
-            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0); background-size: 24px 24px;"></div>
-        </div>
-        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent"></div>
+        /* Glass Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            border-color: #A7D8F9;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(167, 216, 249, 0.25);
+        }
+
+        /* Animations */
+        @keyframes smoothUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
         
-        <div class="container mx-auto px-4 py-20 relative">
-            <h2 class="section-title">Profile</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="flex flex-col-reverse md:flex-row items-center gap-8">
-                    <div class="w-full md:w-1/2">
-                        <h3 class="text-2xl mb-6 text-center md:text-left">Muhammad Sultan Zidan</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            I blend creative problem-solving and technical expertise to craft reliable, engaging applications with intuitive user experiences.<br>
-                            I create engaging games and apps with advanced mechanics and appealing design, built in free time to sharpen skills and explore innovative software ideas.
-                        </p>
+        @keyframes text-shimmer-fast {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes expandWidth {
+            0% { width: 0; opacity: 0; }
+            100% { width: 100%; opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .animate-delay-100 { animation-delay: 100ms; }
+        .animate-delay-200 { animation-delay: 200ms; }
+        .animate-delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-200 selection:text-yellow-900">
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 transition-all duration-300 backdrop-blur-md bg-[#fafdfd]/80 border-b border-slate-200/50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="font-display font-bold text-xl tracking-tighter text-slate-800 flex items-center gap-2">
+                <span class="w-3 h-3 bg-yellow-400 rounded-full inline-block animate-pulse"></span>
+                DEV<span class="text-yellow-500">.</span>UI
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-500">
+                <a href="#about" class="hover:text-yellow-600 transition-colors">About</a>
+                <a href="#skills" class="hover:text-yellow-600 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-yellow-600 transition-colors">Projects</a>
+                <a href="#achievements" class="hover:text-yellow-600 transition-colors">Awards</a>
+            </div>
+            <a href="#contact" class="px-5 py-2 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-slate-700 transition-all hover:scale-105">Contact Me</a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative w-full min-h-screen pt-24 md:pt-0 flex flex-col justify-center overflow-hidden">
+        
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 bg-grid-elegant [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"></div>
+        </div>
+        <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-200/20 rounded-full blur-[100px] -z-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-200/20 rounded-full blur-[100px] -z-10 animate-pulse-slow animate-delay-200"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4">
+                
+                <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-20">
+                    <h2 class="block leading-[0.9] tracking-tighter opacity-0 animate-[smoothUp_1s_ease-out_forwards]">
+                        <span class="text-outline font-black font-display text-[5rem] md:text-[6rem] lg:text-[8rem] tracking-[-0.05em] hover:text-slate-200 transition-colors duration-500">HELLO</span>
+                    </h2>
+                    <h2 class="block leading-[0.9] tracking-tighter -mt-2 md:-mt-4 lg:-mt-6 opacity-0 animate-[smoothUp_1s_ease-out_0.2s_forwards]">
+                        <span class="font-black font-display text-[4rem] md:text-[5rem] lg:text-[6.5rem] tracking-[-0.05em] text-slate-800 drop-shadow-sm">
+                            I'M <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 animate-[text-shimmer-fast_3s_linear_infinite] bg-[length:200%_auto]">STUDENT</span>
+                        </span>
+                    </h2>
+                    <p class="mt-6 text-slate-500 text-lg md:text-xl font-mono opacity-0 animate-[smoothUp_1s_ease-out_0.5s_forwards] max-w-lg">
+                        Game Developer | Data Science <br>
+                        <span class="text-slate-400 text-sm">Building digital empires, one line at a time.</span>
+                    </p>
+                    <div class="mt-8 flex gap-4 opacity-0 animate-[smoothUp_1s_ease-out_0.7s_forwards]">
+                        <a href="#projects" class="px-8 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition shadow-lg hover:shadow-xl hover:-translate-y-1">View Work</a>
+                        <a href="#contact" class="px-8 py-3 border border-slate-300 text-slate-700 bg-white/50 rounded-lg font-bold hover:bg-white transition">Contact</a>
                     </div>
-                    <div class="w-full md:w-1/2">
-                        <div class="aspect-square rounded-full fade-in">
-                            <img src="img/profile.jpeg" alt="Profile" class="object-cover rounded-full">
+                </div>
+
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end opacity-0 animate-[smoothUp_1s_ease-out_0.9s_forwards]">
+                    <div class="relative w-full max-w-[550px] transform hover:scale-[1.02] transition-transform duration-500">
+                        
+                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-300 to-purple-300 rounded-xl blur opacity-30"></div>
+
+                        <div class="relative bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200">
+                            
+                            <div class="bg-[#f3f3f3] px-4 py-2 flex items-center justify-between border-b border-[#e5e5e5]">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
+                                </div>
+                                <div class="flex items-center gap-2 text-slate-600 text-xs font-sans bg-white px-3 py-1 rounded-t border-t border-l border-r border-[#e5e5e5] -mb-2 shadow-sm">
+                                    <i class="fa-brands fa-js text-[#F0DB4F]"></i>
+                                    <span class="font-medium">ceo_strategy.ts</span>
+                                </div>
+                                <div class="w-10"></div>
+                            </div>
+
+                            <div class="grid grid-cols-[3rem_1fr] bg-white min-h-[260px] text-sm font-mono">
+                                
+                                <div class="bg-white text-slate-300 text-right select-none pt-4 pr-3 border-r border-slate-100 leading-6">
+                                    1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12
+                                </div>
+
+                                <div class="pt-4 pl-3 !text-left leading-6 relative w-full whitespace-pre-wrap break-words font-medium" style="font-family: 'Consolas', monospace;"><span id="ceo-code-display"></span><span class="animate-pulse text-slate-800 inline-block align-middle h-4 w-[2px] bg-black ml-[1px]"></span></div>
+
+                            </div>
+
+                            <div class="bg-[#007acc] text-white px-3 py-1 text-[10px] flex justify-between font-sans relative z-10">
+                                <div class="flex gap-3">
+                                    <span><i class="fa-solid fa-code-branch text-xs mr-1"></i> production</span>
+                                    <span><i class="fa-regular fa-circle-check mr-1"></i> Ready</span>
+                                </div>
+                                <div>TypeScript</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="absolute bottom-0 w-full h-px flex justify-center items-center opacity-0 animate-[expandWidth_1.5s_cubic-bezier(0.16,1,0.3,1)_1s_forwards]">
+            <div class="w-full max-w-4xl h-full bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
+        </div>
     </section>
 
-    <section id="contact" class="py-20 bg-white relative">
-        <div class="absolute inset-0 opacity-[0.03]">
-            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #000 1px, transparent 0); background-size: 24px 24px;"></div>
-        </div>
-        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent"></div>
-        <div class="container mx-auto px-4 text-center relative">
-            <h2 class="section-title">Contact</h2>
-            <p class="text-gray-600 mb-8">You may contact us via the email address provided below.</p>
-            <a id="contact-email" href="mailto:muhammad.sultan51@ui.ac.id" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-500 border-2 border-blue-500/80 rounded-full text-lg transition-all duration-300 hover:bg-blue-500/80 hover:text-white hover:border-blue-500/80 group"
-                aria-label="Send email to muhammad.sultan51@ui.ac.id">muhammad.sultan51@ui.ac.id
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 2L11 13"></path> <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
-                </svg>
-            </a>
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                const emailLink = document.getElementById('contact-email');
-                if (!emailLink) return;
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const displayElement = document.getElementById('ceo-code-display');
+        
+        // 1. BERSIHKAN AREA KODE (PENTING AGAR TIDAK GESER KANAN)
+        displayElement.innerHTML = ""; 
 
-                emailLink.addEventListener('click', (e) => {
-                    const to = 'muhammad.sultan51@ui.ac.id';
-                    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to);
-                    const newWin = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+        // Warna Tema VS Code Light
+        const C_KEYWORD = 'color: #0000ff; font-weight: bold;';   
+        const C_TYPE    = 'color: #267f99';   
+        const C_FUNC    = 'color: #795e26';   
+        const C_STRING  = 'color: #a31515';   
+        const C_VAR     = 'color: #001080';   
+        const C_TEXT    = 'color: #000000';   
 
-                    if (newWin) {
-                        e.preventDefault();
-                        try { newWin.opener = null; } catch (err) { /* ignore */ }
+        // Token Kode
+        // Gunakan \n untuk baris baru
+        // Gunakan spasi manual "  " untuk indentasi
+        const codeTokens = [
+            { text: "class ", style: C_KEYWORD },
+            { text: "EmpireBuilder ", style: C_TYPE },
+            { text: "extends ", style: C_KEYWORD },
+            { text: "Visionary ", style: C_TYPE },
+            { text: "{", style: C_TEXT },
+            { text: "\n  ", style: C_TEXT }, 
+            
+            { text: "private ", style: C_KEYWORD },
+            { text: "strategy", style: C_VAR },
+            { text: ": ", style: C_TEXT },
+            { text: "string", style: C_KEYWORD },
+            { text: ";", style: C_TEXT },
+            { text: "\n\n  ", style: C_TEXT }, 
+
+            { text: "constructor", style: C_KEYWORD }, 
+            { text: "() {", style: C_TEXT },
+            { text: "\n    ", style: C_TEXT }, 
+            { text: "this", style: C_KEYWORD },
+            { text: ".", style: C_TEXT },
+            { text: "strategy", style: C_VAR },
+            { text: " = ", style: C_TEXT },
+            // Teks string dipersingkat agar muat di HP tanpa scroll/wrap aneh
+            { text: "'Innovate & Scale'", style: C_STRING },
+            { text: ";", style: C_TEXT },
+            { text: "\n  ", style: C_TEXT }, 
+            { text: "}", style: C_TEXT },
+            { text: "\n\n  ", style: C_TEXT },
+
+            { text: "async ", style: C_KEYWORD },
+            { text: "execute", style: C_FUNC },
+            { text: "() {", style: C_TEXT },
+            { text: "\n    ", style: C_TEXT }, 
+            { text: "await ", style: C_KEYWORD },
+            { text: "Market", style: C_TYPE },
+            { text: ".", style: C_TEXT },
+            { text: "dominate", style: C_FUNC },
+            { text: "();", style: C_TEXT },
+            { text: "\n    ", style: C_TEXT }, 
+            { text: "return ", style: C_KEYWORD },
+            { text: "'Success'", style: C_STRING },
+            { text: ";", style: C_TEXT },
+            { text: "\n  ", style: C_TEXT },
+            { text: "}", style: C_TEXT },
+            { text: "\n}", style: C_TEXT } 
+        ];
+
+        let tokenIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            let currentHTML = "";
+
+            // Render semua token yang SUDAH selesai diketik
+            for (let i = 0; i < tokenIndex; i++) {
+                currentHTML += `<span style="${codeTokens[i].style}">${codeTokens[i].text}</span>`;
+            }
+
+            if (!isDeleting) {
+                // MENGETIK
+                if (tokenIndex < codeTokens.length) {
+                    const currentToken = codeTokens[tokenIndex];
+                    // Tambahkan karakter satu per satu dari token yang sedang aktif
+                    currentHTML += `<span style="${currentToken.style}">${currentToken.text.substring(0, charIndex + 1)}</span>`;
+                    
+                    displayElement.innerHTML = currentHTML;
+
+                    charIndex++;
+                    // Jika token ini selesai, pindah ke token berikutnya
+                    if (charIndex >= currentToken.text.length) {
+                        tokenIndex++;
+                        charIndex = 0;
                     }
-                    });
-                });
-            </script>
+                    setTimeout(typeLoop, Math.random() * 30 + 20); // Kecepatan Ngetik
+                } else {
+                    isDeleting = true;
+                    setTimeout(typeLoop, 4000); // Jeda sebelum hapus
+                }
+            } else {
+                // MENGHAPUS (Efek tahan Backspace)
+                if (tokenIndex > 0 || charIndex > 0) {
+                    if (charIndex > 0) {
+                        charIndex--;
+                        currentHTML += `<span style="${codeTokens[tokenIndex].style}">${codeTokens[tokenIndex].text.substring(0, charIndex)}</span>`;
+                    } else {
+                        tokenIndex--;
+                        charIndex = codeTokens[tokenIndex].text.length;
+                    }
+                    displayElement.innerHTML = currentHTML;
+                    setTimeout(typeLoop, 15); // Kecepatan Hapus (Cepat)
+                } else {
+                    isDeleting = false;
+                    tokenIndex = 0;
+                    charIndex = 0;
+                    setTimeout(typeLoop, 1000); // Jeda sebelum mulai lagi
+                }
+            }
+        }
+
+        typeLoop();
+    });
+</script>
+
+    <section id="about" class="py-24 relative z-10">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <div class="w-full space-y-6">
+                    
+                    <div>
+                        <h3 class="text-yellow-500 font-mono text-sm tracking-widest uppercase mb-2 font-bold flex items-center gap-2">
+                            <span class="w-8 h-px bg-yellow-500"></span> About Me
+                        </h3>
+                        <h2 class="font-display font-bold text-4xl md:text-5xl text-slate-800 leading-tight">
+                            Membangun Dunia Digital dengan Logika & Seni.
+                        </h2>
+                    </div>
+                    
+                    <div class="block md:hidden w-full flex justify-center py-4 relative group perspective-1000">
+                        <div class="absolute w-48 h-48 bg-yellow-200/40 rounded-full blur-3xl top-0 right-10 -z-10 animate-pulse-slow"></div>
+                        
+                        <div class="relative w-[280px] h-[350px] animate-float-slow transition-all duration-500">
+                            <div class="absolute inset-0 bg-white/30 backdrop-blur-sm rounded-2xl rotate-6 group-hover:rotate-3 transition-transform duration-500 border border-white/50 shadow-2xl z-0"></div>
+                            <div class="relative h-full w-full glass-card p-2 rounded-2xl overflow-hidden z-10">
+                                <img src="img/about.png" alt="Profile UI Student" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-700 ease-in-out shadow-inner">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Halo! Saya adalah mahasiswa <strong class="text-slate-900 bg-yellow-100 px-1">Ilmu Komputer Universitas Indonesia angkatan 2025</strong>. 
+                        Ketertarikan saya terletak pada persimpangan antara teknologi dan kreativitas visual.
+                    </p>
+
+                    <p class="text-slate-600 leading-relaxed">
+                        Saat ini saya aktif mengeksplorasi pengembangan game 3D yang imersif. Selain ngoding, saya aktif berkontribusi di berbagai <span class="font-semibold text-purple-600">event, kegiatan sosial, dan kompetisi nasional</span>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition shadow-lg hover:shadow-xl hover:-translate-y-1 duration-300 flex items-center gap-2">
+                            <i class="fa-solid fa-download"></i> Download CV
+                        </a>
+                        <a href="https://github.com" target="_blank" class="px-6 py-3 border border-slate-200 text-slate-700 rounded-lg font-medium hover:border-slate-400 hover:bg-white transition flex items-center gap-2">
+                            <i class="fa-brands fa-github"></i> Github
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex justify-center relative group perspective-1000">
+                    <div class="absolute w-64 h-64 bg-yellow-200/40 rounded-full blur-3xl top-0 right-0 -z-10 animate-pulse-slow"></div>
+                    <div class="absolute w-64 h-64 bg-blue-200/40 rounded-full blur-3xl bottom-0 left-0 -z-10 animate-pulse-slow animate-delay-300"></div>
+                    
+                    <div class="relative w-[300px] h-[400px] md:w-[350px] md:h-[450px] animate-float-slow transition-all duration-500">
+                        <div class="absolute inset-0 bg-white/30 backdrop-blur-sm rounded-2xl rotate-6 group-hover:rotate-3 transition-transform duration-500 border border-white/50 shadow-2xl z-0"></div>
+                        
+                        <div class="relative h-full w-full glass-card p-2 rounded-2xl overflow-hidden z-10 group-hover:-translate-y-2 transition-transform duration-500">
+                            <img src="img/about.png" alt="Profile UI Student" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-700 ease-in-out shadow-inner">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
-        <footer class="py-8 bg-white">
-            <div class="container mx-auto px-4 text-center">
-                <p class="text-sm text-gray-600">©<script>document.write(new
-                Date().getFullYear());</script> MUHAMMAD SULTAN ZIDAN</p>
+
+    <section id="skills" class="py-24 bg-slate-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+        <div class="absolute -right-20 top-40 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="text-center mb-16">
+                <h3 class="text-yellow-500 font-mono text-sm tracking-widest uppercase mb-2 font-bold">Tech Stack</h3>
+                <h2 class="font-display font-bold text-3xl md:text-4xl text-slate-800">Technical Arsenal</h2>
+                <p class="text-slate-500 mt-3 text-lg max-w-2xl mx-auto">Perangkat dan teknologi yang saya gunakan untuk mengubah ide menjadi realitas.</p>
             </div>
-        </footer>
-    </body>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl hover:bg-white group cursor-default">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-blue-200">
+                        <i class="fa-solid fa-gamepad text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-slate-800">Game Development</h3>
+                    <p class="text-sm text-slate-500 mb-6 leading-relaxed">Membangun mekanik game yang kompleks, sistem fisika, dan pengalaman interaktif yang imersif.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition">Unity 3D</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition">C#</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition">Unreal Engine</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition">Roblox Studio</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition">Pygame</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white group cursor-default">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-purple-200">
+                        <i class="fa-solid fa-cube text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-slate-800">3D Modeling & Art</h3>
+                    <p class="text-sm text-slate-500 mb-6 leading-relaxed">Menciptakan aset visual low-poly hingga high-fidelity, rigging, dan animasi karakter.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-purple-50 hover:text-purple-600 transition">Blender</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-purple-50 hover:text-purple-600 transition">Maya</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-purple-50 hover:text-purple-600 transition">Shading</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:bg-white group cursor-default">
+                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl flex items-center justify-center text-yellow-600 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-yellow-200">
+                        <i class="fa-solid fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-slate-800">Web Engineering</h3>
+                    <p class="text-sm text-slate-500 mb-6 leading-relaxed">Pengembangan frontend modern yang responsif, cepat, dan memiliki UI/UX yang intuitif.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-yellow-50 hover:text-yellow-600 transition">React.js</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-yellow-50 hover:text-yellow-600 transition">Tailwind</span>
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded-md text-xs font-semibold text-slate-600 hover:bg-yellow-50 hover:text-yellow-600 transition">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="py-24">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-slate-800 mb-12 text-center">Journey & Milestones</h2>
+            
+            <div class="space-y-4">
+                <div class="group glass-card p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-6 hover:bg-white/90 transition-all cursor-default relative overflow-hidden">
+                    <div class="absolute w-1 h-full bg-blue-400 left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col items-center justify-center min-w-[80px] h-20 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold font-mono">
+                        <span class="text-lg">2025</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Semifinalist - BUDAYA GO!</h4>
+                        <p class="text-slate-500 text-sm mt-1 leading-relaxed">Ketua Tim Pengembang Game Nusantara Defense. Menciptakan solusi permainan interaktif untuk meningkatkan ketertarikan budaya lokal yang diselenggarakan Kemenkebud..</p>
+                    </div>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">Team Competition</span>
+                </div>
+
+                <div class="group glass-card p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-6 hover:bg-white/90 transition-all cursor-default relative overflow-hidden">
+                    <div class="absolute w-1 h-full bg-purple-400 left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col items-center justify-center min-w-[80px] h-20 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold font-mono">
+                        <span class="text-lg">2023</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-slate-800 group-hover:text-purple-600 transition-colors">Semifinalist - Code The Ocean</h4>
+                        <p class="text-slate-500 text-sm mt-1 leading-relaxed">Semifinalist dalam kompetisi koding anak nasional yang diselenggarakan oleh PT. Koding Next & didukung Puspresnas.</p>
+                    </div>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">Single Competition</span>
+                </div>
+
+                <div class="group glass-card p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-6 hover:bg-white/90 transition-all cursor-default relative overflow-hidden">
+                    <div class="absolute w-1 h-full bg-yellow-400 left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col items-center justify-center min-w-[80px] h-20 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 font-bold font-mono">
+                        <span class="text-lg">2026</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-slate-800 group-hover:text-yellow-600 transition-colors">UI Road To Banyumas</h4>
+                        <p class="text-slate-500 text-sm mt-1 leading-relaxed">Project Officer. Memimpin inisiatif pengenalan kampus UI ke daerah Banyumas dan mengembangkan portal informasinya.</p>
+                    </div>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-100">Leadership</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-gradient-to-b from-transparent to-slate-100/50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-display font-bold text-3xl md:text-4xl text-slate-800">Featured Projects</h2>
+                    <p class="text-slate-500 mt-2">Karya terbaru yang saya kembangkan.</p>
+                </div>
+                <a href="#contact" class="hidden md:flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium text-sm mt-4 md:mt-0 group">
+                    Lihat semua project <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <div class="glass-card rounded-2xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="h-64 bg-slate-200 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-slate-50/40 via-white/10 to-transparent z-10"></div>
+                        
+                        <div class="w-full h-full bg-slate-300 flex items-center justify-center text-slate-500 overflow-hidden">
+                            <img src="img/urban.png" alt="Urban 2026 Website" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-display font-bold text-2xl text-slate-800">Urban 2026 Website</h3>
+                            <a href="https://ristek.link/urban2026" target="_blank" class="text-slate-400 hover:text-blue-500 transition"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                            Official website untuk project UI Road To Banyumas. Halaman statis yang dibangun menggunakan Tailwind CSS untuk styling yang rapi dan responsif.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded">HTML</span>
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="h-64 bg-slate-200 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-slate-50/40 via-white/10 to-transparent z-10"></div>
+
+                        <div class="w-full h-full bg-slate-300 flex items-center justify-center text-slate-500 overflow-hidden">
+                            <img src="img/nusantara.png" alt="Nusantara Defense" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-display font-bold text-2xl text-slate-800">Nusantara Defense</h3>
+                            <a href="https://www.roblox.com/games/114064084021268/DEMO-Nusantara-Defense" class="text-slate-400 hover:text-blue-500 transition"><i class="fa-solid fa-gamepad"></i></a>
+                        </div>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                            Game Tower Defense yang dikembangkan di platform Roblox. Menggabungkan strategi pertahanan dengan aset 3D custom.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded">Roblox Studio</span>
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded">LUA</span>
+                            <span class="text-[10px] font-bold tracking-wider uppercase text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded">Blender</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative overflow-hidden border-t border-slate-200 bg-white">
+        <div class="absolute inset-0 bg-grid-elegant opacity-50 pointer-events-none"></div>
+        <div class="container mx-auto px-6 max-w-4xl relative z-10 text-center">
+            <h2 class="font-display font-bold text-4xl md:text-5xl text-slate-800 mb-6">Let's build something amazing.</h2>
+            <p class="text-slate-500 mb-10 text-lg max-w-xl mx-auto">
+                Tertarik berkolaborasi untuk Game Project, Website, atau sekedar diskusi teknologi? Saya selalu terbuka untuk ide-ide baru.
+            </p>
+            <a href="mailto:muhammad.sultan51@ui.ac.id" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-yellow-500 hover:text-slate-900 hover:scale-105 transition-all shadow-xl shadow-slate-900/20">
+                <i class="fa-regular fa-paper-plane"></i>
+                Hubungi Saya
+            </a>
+            
+            <div class="mt-16 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
+                <p>&copy; 2026 Mahasiswa Fasilkom UI. Made with code.</p>
+                <div class="flex gap-6 mt-4 md:mt-0 text-xl">
+                    <a href="https://www.linkedin.com/in/muhammad-sultan-zidan-798184347" class="hover:text-slate-800 transition transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/zydanidn" class="hover:text-slate-800 transition transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-slate-800 transition transform hover:-translate-y-1"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
 </html>
