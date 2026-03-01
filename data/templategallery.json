@@ -1,0 +1,54 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "generated_by": "Muhammad Sultan Zidan"
+    },
+    "global_assets": {
+        "ui_interaction_icons": {
+                "like_icon": "/assets/icons/ui/heart_outline.svg",
+                "like_icon_active": "/assets/icons/ui/heart_filled_red.svg",
+                "comment_icon": "/assets/icons/ui/chat_bubble.svg",
+                "share_icon": "/assets/icons/ui/paper_plane.svg",
+                "save_icon": "/assets/icons/ui/bookmark_outline.svg",
+                "save_icon_active": "/assets/icons/ui/bookmark_filled.svg"
+            },
+            "default_placeholders": {
+                "profile_picture": "/assets/users/zidan_profile_thumb.jpg",
+                "image_loader": "/assets/ui/loaders/skeleton_rect.gif"
+        }
+    },
+    "posts_data": [
+        {
+            "post_id": "post_id",
+            "publisher_info": {
+                "name": "name_of_publisher",
+                "role": "role_in_organization",
+                "avatar_path": "/assets/users/zidan_avatar.png"
+            },
+            "publish_metadata": {
+                "month_year": "month year",
+                "category_badge": "category_badge",
+                "category_color_hex": "#colorhex"
+            },
+            "content_media": {
+                "image_slide": 2,
+                "alt_text": "description_of_image"
+            },
+            "content_text": {
+                "main_title": "main_title_of_post",
+                "description": "description_text_of_post",
+                "hashtags": [
+                    "#hashtag1",
+                    "#hashtag2",
+                    "#hashtag3"
+                ]
+            },
+            "interaction_metrics": {
+                "likes_count": null,
+                "comments_text": "View all null comments",
+                "is_liked_by_user": false,
+                "is_saved_by_user": true
+            }
+        } 
+    ]
+}

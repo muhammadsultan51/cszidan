@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Aftereffect",
+        "file": "aftereffect.png"
+    },
+    {
+        "name": "Aseprite",
+        "file": "aseprite.png"
+    },
+    {
+        "name": "Blender",
+        "file": "blender.png"
+    },
+    {
+        "name": "C++",
+        "file": "c++.png"
+    },
+    {
+        "name": "CSS3",
+        "file": "css.png"
+    },
+    {
+        "name": "ChatGPT",
+        "file": "chatgpt.svg"
+    },
+    {
+        "name": "Davinciresolve",
+        "file": "davinciresolve.png"
+    },
+    {
+        "name": "Discordbot",
+        "file": "discordbot.png"
+    },
+    {
+        "name": "Django",
+        "file": "django.svg"
+    },
+    {
+        "name": "Docker",
+        "file": "docker.webp"
+    },
+    {
+        "name": "Figma",
+        "file": "figma.png"
+    },
+    {
+        "name": "Firebase",
+        "file": "Firebase.png"
+    },
+    {
+        "name": "Framer",
+        "file": "framer.png"
+    },
+    {
+        "name": "Gemini",
+        "file": "gemini.png"
+    },
+    {
+        "name": "Github",
+        "file": "github.svg"
+    },
+    {
+        "name": "Gitwhite",
+        "file": "gitwhite.png"
+    },
+    {
+        "name": "Godot",
+        "file": "godot.svg"
+    },
+    {
+        "name": "Golang",
+        "file": "golang.png"
+    },
+    {
+        "name": "HTML5",
+        "file": "html.png"
+    },
+    {
+        "name": "Icons",
+        "file": "icons.svg"
+    },
+    {
+        "name": "Java",
+        "file": "java.png"
+    },
+    {
+        "name": "JavaScript",
+        "file": "js.png"
+    },
+    {
+        "name": "Jwt",
+        "file": "jwt.svg"
+    },
+    {
+        "name": "Lua",
+        "file": "lua.png"
+    },
+    {
+        "name": "Mulearn",
+        "file": "mulearn.svg"
+    },
+    {
+        "name": "Mysql",
+        "file": "mysql.png"
+    },
+    {
+        "name": "Next",
+        "file": "next.png"
+    },
+    {
+        "name": "Photoshop",
+        "file": "photoshop.png"
+    },
+    {
+        "name": "Php",
+        "file": "php.png"
+    },
+    {
+        "name": "Postger",
+        "file": "postger.png"
+    },
+    {
+        "name": "Premierepro",
+        "file": "premierepro.png"
+    },
+    {
+        "name": "Pytorch",
+        "file": "pytorch.png"
+    },
+    {
+        "name": "React",
+        "file": "react.png"
+    },
+    {
+        "name": "Robloxstudio",
+        "file": "robloxstudio.png"
+    },
+    {
+        "name": "Scratch",
+        "file": "scratch.png"
+    },
+    {
+        "name": "Supabase",
+        "file": "supabase.svg"
+    },
+    {
+        "name": "Tailwind",
+        "file": "tailwind.png"
+    },
+    {
+        "name": "Tensorflow",
+        "file": "tensorflow.png"
+    },
+    {
+        "name": "Threejs",
+        "file": "threejs.png"
+    },
+    {
+        "name": "Ts",
+        "file": "ts.png"
+    },
+    {
+        "name": "Unity",
+        "file": "unity.webp"
+    },
+    {
+        "name": "Unrealengine",
+        "file": "unrealengine.png"
+    },
+    {
+        "name": "Vercel",
+        "file": "vercel.svg"
+    },
+    {
+        "name": "Vs",
+        "file": "vs.svg"
+    }
+]
